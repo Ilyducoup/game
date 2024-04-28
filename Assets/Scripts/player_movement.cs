@@ -26,8 +26,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _axisMovement.x = Input.GetAxisRaw("Horizontal");
         _axisMovement.y = Input.GetAxisRaw("Vertical");
-        var dashInput = Input.GetKeyDown(KeyCode.Space);
-
+        var dashInput = Input.GetButton("Dash");
+    
         if (dashInput && _canDash)
         {
             _isDashing = true;
