@@ -1,25 +1,23 @@
 using UnityEngine;
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody2D _body;
 
-    // Variables that are setup at Start()
-    public float speed = 5;
-    private Vector3 axisMovement;
-    private Rigidbody2D     body;
+    [Header("Movement variables")]
+    private Vector3 _axisMovement;
+    [SerializeField] private float _speed = 5f;
+
+    
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        _body = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Catch player movement inputs
-        axisMovement.x = Input.GetAxisRaw("Horizontal");
-        axisMovement.y = Input.GetAxisRaw("Vertical");
+        _axisMovement.x = Input.GetAxisRaw("Horizontal");
+        _axisMovement.y = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
@@ -29,19 +27,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        body.velocity = axisMovement.normalized * speed;
+        _body.velocity = _axisMovement.normalized * _speed;
         CheckForFlipping();
     }
 
     private void CheckForFlipping()
     {
-        if(axisMovement.x < 0)
-        {
+        if(_axisMovement.x < 0)
             transform.localScale = new Vector3(-1f, transform.localScale.y);
-        }
-        else if(axisMovement.x > 0)
-        {
+        else if(_axisMovement.x > 0)
             transform.localScale = new Vector3(1f, transform.localScale.y);
-        }
     }
 }
