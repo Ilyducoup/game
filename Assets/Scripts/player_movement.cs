@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D _body;
+    private TrailRenderer _trail;
     private float _speed;
 
     [Header("Movement variables")]
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
+        _trail = GetComponent<TrailRenderer>();
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _isDashing = true;
             _canDash = false;
+            _trail.emitting = true;
             StartCoroutine(StopDashing());
         }
     }
@@ -61,5 +64,6 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.15f);
         _canDash = true;
         _isDashing = false;
+        _trail.emitting = false;
     }
 }
